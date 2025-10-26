@@ -22,6 +22,7 @@ class ProfileTableViewCell: UITableViewCell {
         //img.backgroundColor = .systemGreen
         img.layer.cornerRadius = 12
         img.clipsToBounds = true
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
