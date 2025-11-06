@@ -18,19 +18,16 @@ class TransactionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var amountLable: UILabel!
     
+    @IBOutlet weak var viewContent: UIView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         selectionStyle = .none
-    }
-
-    @IBOutlet weak var viewContent: UIView!
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
         viewContent.layer.cornerRadius = 5
         viewContent.layer.masksToBounds = true
+      
     }
     
 }

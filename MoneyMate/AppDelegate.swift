@@ -7,7 +7,9 @@
 
 import UIKit
 import CoreData
-
+import IQKeyboardManagerSwift
+import IQKeyboardToolbar
+import IQKeyboardToolbarManager
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,6 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        IQKeyboardManager.shared.isEnabled = true
+        IQKeyboardManager.shared.resignOnTouchOutside = true
+        preloadCategories()
+
+        
         return true
     }
 
@@ -30,6 +38,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    func preloadCategories() {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        
+        let count = (try? context.count(for: request)) ?? 0
+        if count > 0 {
+            return
+        }
+        
+        let categories: [(String, String)] = [
+            ("Ăn uống", "cutlery.png"),
+            ("Di chuyển", "car.png"),
+            ("Nhà ở", "building.png"),
+            ("Mua sắm", "add-to-cart.png"),
+            ("Giải trí", "gamepad.png"),
+            ("Sức khỏe", "heart-rate.png"),
+            ("Xăng xe", "gas-pump.png"),
+            ("Khác","three-dots.png"),
+            ("Lương", "atm-card.png"),
+            ("Thưởng", "giftbox.png"),
+            ("Đầu tư",  "growth-graph")
+        ]
+        for (name, icon) in categories {
+            let category = Category(context: context)
+            category.id = UUID()
+            category.name = name
+            category.icon = icon
+        }
+        do {
+            try context.save()
+        } catch let error {
+            print(error)
+        }
+        
     }
 
     // MARK: - Core Data stack

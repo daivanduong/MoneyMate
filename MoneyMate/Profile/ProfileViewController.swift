@@ -8,36 +8,36 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    
     let data: [[[String]]] = [
-                [
-                    ["user.png", "Đại Văn Dương", "Hồ sơ cá nhân"],
-                    
-                ],
-                [
-                    ["wallet.png", "Ví chính", "9.500.000đ"],
-                    ["atm-card.png", "Thẻ ngân hàng", "2 thẻ đã liên kết"]
-                ],
-                [
-                    ["bell.png", "Thông báo", "Bật"],
-                    ["lock.png", "Bảo mật", "Face ID, Mật khẩu"],
-                    ["cloud.png", "Sao lưu", "Đã sao lưu 2 giờ trước"],
-                    ["half-moon.png", "Chế độ tối", "Tắt"],
-                    
-                ],
-                [
-                    ["question-mark", "Trung tâm trợ giúp", "Câu hỏi thường gặp"],
-                    ["star.png", "Đánh giá ứng dụng", "Chia sẻ ý kiến của bạn"]
-                ]
-            ]
+        [
+            ["user.png", "Đại Văn Dương", "Hồ sơ cá nhân"],
             
-            let sectionTitles = ["Tôi", "Tài khoản", "Cài đặt", "Hỗ trợ"]
-        
+        ],
+        [
+            ["wallet.png", "Ví chính", "9.500.000đ"],
+            ["atm-card.png", "Thẻ ngân hàng", "2 thẻ đã liên kết"]
+        ],
+        [
+            ["bell.png", "Thông báo", "Bật"],
+            ["lock.png", "Bảo mật", "Face ID, Mật khẩu"],
+            ["cloud.png", "Sao lưu", "Đã sao lưu 2 giờ trước"],
+            ["half-moon.png", "Chế độ tối", "Tắt"],
+            
+        ],
+        [
+            ["question-mark", "Trung tâm trợ giúp", "Câu hỏi thường gặp"],
+            ["star.png", "Đánh giá ứng dụng", "Chia sẻ ý kiến của bạn"]
+        ]
+    ]
+    
+    let sectionTitles = ["Tôi", "Tài khoản", "Cài đặt", "Hỗ trợ"]
+    
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setLeftNavTitle("Tôi")
         setupTableView()
@@ -45,17 +45,17 @@ class ProfileViewController: UIViewController {
     }
     
     func setupTableView() {
-            tableView.delegate = self
-            tableView.dataSource = self
-            let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
-            tableView.register(nib, forCellReuseIdentifier: "profileTableViewCell")
-        }
-        
-        func setupHeaderView() {
-            let nib = UINib(nibName: "CustomHeaderView", bundle: nil)
-            tableView.register(nib, forHeaderFooterViewReuseIdentifier: "customHeaderView")
-        }
-
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib(nibName: "ProfileTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "profileTableViewCell")
+    }
+    
+    func setupHeaderView() {
+        let nib = UINib(nibName: "CustomHeaderView", bundle: nil)
+        tableView.register(nib, forHeaderFooterViewReuseIdentifier: "customHeaderView")
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		5FCA479D2E9F984E001FA37E /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 5FCA479C2E9F984E001FA37E /* DGCharts */; };
+		5FCA484E2EA08D30001FA37E /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5FCA484D2EA08D30001FA37E /* IQKeyboardManagerSwift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		5FAEF1672E8ACCA70051709C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5FCA479D2E9F984E001FA37E /* DGCharts in Frameworks */,
+				5FCA484E2EA08D30001FA37E /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +98,7 @@
 				5FAEF14F2E8ACCA60051709C /* MoneyMate */,
 				5FAEF1692E8ACCA70051709C /* MoneyMateTests */,
 				5FAEF1732E8ACCA70051709C /* MoneyMateUITests */,
+				5FCA479B2E9F984E001FA37E /* Frameworks */,
 				5FAEF14E2E8ACCA60051709C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +111,13 @@
 				5FAEF1702E8ACCA70051709C /* MoneyMateUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5FCA479B2E9F984E001FA37E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +140,8 @@
 			);
 			name = MoneyMate;
 			packageProductDependencies = (
+				5FCA479C2E9F984E001FA37E /* DGCharts */,
+				5FCA484D2EA08D30001FA37E /* IQKeyboardManagerSwift */,
 			);
 			productName = MoneyMate;
 			productReference = 5FAEF14D2E8ACCA60051709C /* MoneyMate.app */;
@@ -208,6 +225,10 @@
 			);
 			mainGroup = 5FAEF1442E8ACCA60051709C;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5FCA479A2E9F97D3001FA37E /* XCRemoteSwiftPackageReference "Charts" */,
+				5FCA484C2EA08D1C001FA37E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5FAEF14E2E8ACCA60051709C /* Products */;
 			projectDirPath = "";
@@ -295,6 +316,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -324,6 +346,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
@@ -571,6 +594,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5FCA479A2E9F97D3001FA37E /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+		5FCA484C2EA08D1C001FA37E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5FCA479C2E9F984E001FA37E /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FCA479A2E9F97D3001FA37E /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+		5FCA484D2EA08D30001FA37E /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FCA484C2EA08D1C001FA37E /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5FAEF1452E8ACCA60051709C /* Project object */;
 }

@@ -13,6 +13,7 @@ class MonthlyTransactionsViewController: UIViewController {
     @IBOutlet weak var monthLable: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var listTransaction: [Transaction] = []
+    var monthString = ""
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let fetchRequest: NSFetchRequest<Transaction> = Transaction.fetchRequest()
@@ -21,49 +22,18 @@ class MonthlyTransactionsViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        monthLable.text = monthString
         setupTableView()
-        //loadListTransaction()
-        fetchTotals()
     }
     func setupTableView() {
         let nib = UINib(nibName: "TransactionTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "transactionTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.reloadData()
     }
-    func loadListTransaction() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-        let sort = NSSortDescriptor(key: "date", ascending: false)
-        request.sortDescriptors = [sort]
-          
-        do {
-            listTransaction =  try context.fetch(request)
-        } catch {
-            print("error: \(error)")
-        }
-        
-    }
-    func fetchTotals(for month: Int = 10, year: Int = 2025) {
-           
-            do {
-                let allTransactions = try context.fetch(fetchRequest)
-                let calendar = Calendar.current
-                
-                // Lọc theo tháng & năm
-                let monthlyTransactions = allTransactions.filter { transaction in
-                    guard let date = transaction.date else { return false }
-                    let comps = calendar.dateComponents([.month, .year], from: date)
-                    return comps.month == month && comps.year == year
-                }
-                listTransaction = monthlyTransactions
-                
-            } catch {
-                print("Lỗi fetch:", error)
-               
-            }
-        }
+    
 }
 
 
@@ -77,38 +47,41 @@ extension MonthlyTransactionsViewController: UITableViewDelegate, UITableViewDat
         cell.img.image = UIImage(named: (listTransaction[indexPath.row].category?.icon)!)
         cell.titleLable.text = listTransaction[indexPath.row].note
         cell.subTitleLable.text =  formatChatDate(listTransaction[indexPath.row].date!) + "   -   " + (listTransaction[indexPath.row].category?.name)!
-        if listTransaction[indexPath.row].type == "income" {
-            cell.amountLable.text = "+" + formatCurrency(listTransaction[indexPath.row].amount) + "đ"
+        if listTransaction[indexPath.row].type == TransactionType.income.rawValue {
+            cell.amountLable.text = "+" + formatCurrency(listTransaction[indexPath.row].amount) + "₫"
             cell.amountLable.textColor = .green
         } else {
-            cell.amountLable.text = "-" + formatCurrency(listTransaction[indexPath.row].amount) + "đ"
+            cell.amountLable.text = "-" + formatCurrency(listTransaction[indexPath.row].amount) + "₫"
             cell.amountLable.textColor = .red
         }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-            forRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
         
-        if editingStyle == .delete {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Xoá") { _, _, completion in
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            let transaction = listTransaction[indexPath.row]
+            let transaction = self.listTransaction[indexPath.row]
             context.delete(transaction)
-            listTransaction.remove(at: indexPath.row)
+            self.listTransaction.remove(at: indexPath.row)
             do {
                 try context.save()
             } catch {
                 print("\(error)")
             }
+            tableView.reloadData()
+            completion(true)
         }
-        tableView.reloadData()
+        deleteAction.backgroundColor = .systemRed
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
     
 }
 
